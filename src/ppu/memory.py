@@ -16,6 +16,9 @@ class ppumemory:
     def write_vram(self, address: int, value: int) -> None:
         address &= 0x3FFF  # Mask to 14 bits
         self.vram[address] = value
+    
+    def load_chr(self, chr_data: bytes) -> None:
+        self.vram[:0x2000] = list(chr_data)
 
     def read_palette_ram(self, address: int ) -> int:
         address &= 0x1F  # Mask to 5 bits
