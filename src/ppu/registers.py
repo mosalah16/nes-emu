@@ -27,20 +27,20 @@ class ppuregisters:
 # PPUDATA	0x2007	  Data register (Used to read/write VRAM data)
 
     # Internal state for scroll and address handling
-        self.write_toggle = False  # toggle for PPUSCROLL and PPUADDR writes
+        self.write_toggle = False  # toggle for writes
         self.temp_address = 0x0000  # temporary address
+
+    def write_control(self, value: int) -> None:
+        self.control = value
+
+    def write_mask(self, value: int) -> None:
+            self.mask = value
 
     def read_status(self) -> int:
         value = self.status
         self.status &= 0x7F  # clear VBlank flag after reading
         self.write_toggle = False  # reset write toggle
         return value
-
-    def write_control(self, value: int) -> None:
-        self.control = value
-
-    def write_mask(self, value: int) -> None:
-        self.mask = value
 
     def write_scroll(self, value: int) -> None:
         if not self.write_toggle:

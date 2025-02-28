@@ -21,7 +21,7 @@ class ppumemory:
         address &= 0x1F  # Mask to 5 bits
         return self.palette_ram[address]
     
-    def write_vram(self, address: int, value: int) -> None:
+    def write_palette_ram(self, address: int, value: int) -> None:
         address &= 0x1F  # Mask to 5 bits
         self.palette_ram[address] = value
 
